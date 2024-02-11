@@ -11,7 +11,7 @@ pipeline {
         
         stage('execute') {
             steps {
-                sh 'ansible-playbook -i inventory tomcat_playbook.yml'
+                sh 'ansible-playbook -i hosts tomcat_playbook.yml'
             }
         }
     }
