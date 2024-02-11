@@ -1,15 +1,18 @@
 pipeline {
     agent any
+    
     stages {
-        stage('ansible') {
+        stage('Checkout') {
             steps {
-		sh 'rm -rf ansible'
+                sh 'rm -rf ansible'
                 sh 'git clone https://github.com/sudhasanshi/ansible.git'
             }
         }
-		stage('deploy') {
+        
+        stage('Run Ansible Playbook') {
             steps {
-                sh 'ansible-playbook tomcat_playbook.yml -i /etc/ansible/hosts --private-key ~/.ssh/id_rsa --user root'
+                // Execute Ansible playbook
+                sh 'ansible-playbook -i inventory tomcat_playbook.yml'
             }
         }
     }
