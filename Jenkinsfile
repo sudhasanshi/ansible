@@ -6,3 +6,5 @@ pipeline {
                 sh 'git clone https://github.com/sudhasanshi/ansible.git'
             }
         }
+    }
+}
