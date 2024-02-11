@@ -1,0 +1,5 @@
+---
+- name: calling_tomcate_role
+  hosts: all
+  roles:
+    - tomcat_role

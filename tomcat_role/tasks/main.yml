@@ -1,0 +1,32 @@
+---
+# tasks file for tomcat_role
+- name: update_apt
+  when: ansible_distribution == "Ubuntu"
+  apt: 
+    update_cache: yes
+
+- name: update_yum
+  when: ansible_distribution == "RedHat"
+  yum:
+    update_cache: yes
+
+- name: install_java
+  apt:
+    name: default-jdk
+    state: present
+
+- name: download_tomcat
+  get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_main_version }}/v{{ tomcat_sub_version }}/bin/apache-tomcat-{{ tomcat_sub_version }}.tar.gz
+    dest: /opt
+- name: extracting_tar_files
+  unarchive:
+    src: /opt/apache-tomcat-{{ tomcat_sub_version }}.tar.gz
+    dest: /opt
+    remote_src: yes
+- name: providing_execute_permissions
+  file:
+    path: /opt/apache-tomcat-{{ tomcat_sub_version }}/bin/startup.sh
+    mode: 0777
+- name: start_tomcat
+  shell: nohup /opt/apache-tomcat-{{ tomcat_sub_version }}/bin/startup.sh
