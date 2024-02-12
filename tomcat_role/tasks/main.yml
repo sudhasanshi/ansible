@@ -1,19 +1,10 @@
 ---
 # tasks file for tomcat_role
-- name: update_apt
-  when: ansible_distribution == "Ubuntu"
-  apt: 
-    update_cache: yes
-
-- name: update_yum
-  when: ansible_distribution == "RedHat"
-  yum:
-    update_cache: yes
-
 - name: install_java
   apt:
     name: default-jdk
     state: present
+    update_cache: yes
 
 - name: download_tomcat
   get_url:
