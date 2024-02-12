@@ -1,5 +1,6 @@
 ---
 - name: calling_tomcate_role
   hosts: all
+  become: yes
   roles:
     - tomcat_role
